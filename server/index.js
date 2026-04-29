@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 const Booking = require('./models/Booking');
 
 const app = express();
@@ -16,7 +17,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/printer_r
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-// Routes
+// API Routes
 app.post('/api/book-service', async (req, res) => {
   try {
     const { name, phone, address, brand, issue } = req.body;
@@ -54,6 +55,15 @@ app.patch('/api/bookings/:id/status', async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: 'Error updating status', error: error.message });
   }
+});
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
 app.listen(PORT, () => {

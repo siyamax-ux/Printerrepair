@@ -18,7 +18,7 @@ const AdminDashboard = () => {
 
   const fetchBookings = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/bookings');
+      const res = await axios.get('/api/bookings');
       setBookings(res.data);
     } catch (error) {
       toast.error('Failed to fetch bookings');
@@ -38,7 +38,7 @@ const AdminDashboard = () => {
   const deleteBooking = async (id) => {
     if (window.confirm('Are you sure you want to delete this booking?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/bookings/${id}`);
+        await axios.delete(`/api/bookings/${id}`);
         setBookings(bookings.filter(b => b._id !== id));
         toast.success('Booking deleted');
       } catch (error) {
@@ -49,7 +49,7 @@ const AdminDashboard = () => {
 
   const updateStatus = async (id, status) => {
     try {
-      const res = await axios.patch(`http://localhost:5000/api/bookings/${id}/status`, { status });
+      const res = await axios.patch(`/api/bookings/${id}/status`, { status });
       setBookings(bookings.map(b => b._id === id ? res.data : b));
       toast.success(`Status updated to ${status}`);
     } catch (error) {

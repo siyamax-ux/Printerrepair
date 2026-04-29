@@ -23,7 +23,7 @@ const BookService = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post('http://localhost:5000/api/book-service', formData);
+      await axios.post('/api/book-service', formData);
       setSubmitted(true);
       toast.success('Service booked successfully!');
     } catch (error) {
