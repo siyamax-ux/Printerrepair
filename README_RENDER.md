@@ -21,16 +21,18 @@ This guide will walk you through deploying your MERN stack application to **Rend
 2. Click **New +** and select **Web Service**.
 3. Connect your GitHub repository.
 
-### Step B: Configure the Web Service
-- **Name:** `printer-repair-shop` (or your choice)
+### Step B: Configure the Web Service (CRITICAL)
+**Make sure these are set exactly as follows:**
+
+- **Name:** `printer-repair-shop`
 - **Environment:** `Node`
-- **Root Directory:** `(leave blank)`
-- **Build Command:** `npm run build`
-- **Start Command:** `npm start`
+- **Root Directory:** `(leave this EMPTY)`
+- **Build Command:** `npm run build`  <-- **(Do NOT use default 'npm install')**
+- **Start Command:** `npm start`      <-- **(Do NOT use default 'node index.js')**
 
 ### Step C: Set Environment Variables
-Click on the **Advanced** button and add the following Environment Variables:
-1. `MONGODB_URI` = `your_mongodb_connection_string`
+Click on the **Environment** tab and add:
+1. `MONGODB_URI` = `your_mongodb_connection_string` (from MongoDB Atlas)
 2. `NODE_ENV` = `production`
 
 ## 4. How the App Works Now
